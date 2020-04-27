@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calorify</title>
+</head>
+<body>
+    <div>Hello world</div>
+    <div>Enter a url or upload an image</div>
+    <form enctype="multipart/form-data" action="/ingredients" method="post">
+        <label for="file">file upload</label>
+        <input type="file" name="file" />
+        <label for="url_upload">image url</label>
+        <input type="text" name="url_upload" />
+        <label for="submit_image">submit image</label>
+        <input type="submit" name="submit_image" />
+    </form>
+</body>
+</html>
