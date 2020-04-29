@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\cxu7\Documents\GitHub\pythonproject-zc\calorify\venv"
+VIRTUAL_ENV="C:\Users\zcheng3\Documents\GitHub\pythonproject-zc\calorify\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
