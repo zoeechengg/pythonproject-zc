@@ -36,7 +36,7 @@ def get_ingredients_for_url(url):
     try:
         concepts = response['outputs'][0]['data']['concepts']  # clarifai API predictions of what's in the image.
         ingredients = [concept['name'] for concept in concepts]
-        cache.set_prediction(file_path, ingredients)
+        cache.set_prediction(url, ingredients)
     except Exception as e:
         print(e)
 

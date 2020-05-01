@@ -12,16 +12,14 @@ from fetchers import calories_fetcher
 from cache import cache
 
 app = Flask(__name__)
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 STATIC_IMAGE_PATH = 'static/uploaded_images'
 FILE_UPLOAD_PATH = os.path.join(app.root_path, STATIC_IMAGE_PATH)
-ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/')
@@ -33,33 +31,6 @@ def home():
 def get_ingredients():
     """
     Handler for fetching ingredients + calories per ingredient for an image.
-
-    response looks like
-    [
-        {
-            'ingredient': 'sauce',
-            'nutritional_info':
-            {
-                'ENERC_KCAL': 438.0,
-                'PROCNT': 7.68,
-                'FAT': 18.33,
-                'CHOCDF': 60.52, 'FIBTG': 1.0
-            }
-        },
-        {
-            'ingredient': 'spaghetti',
-            'nutritional_info':
-            {
-                'ENERC_KCAL': 371.0,
-                'PROCNT': 13.04,
-                'FAT': 1.51,
-                'CHOCDF': 74.67,
-                'FIBTG': 3.2
-            }
-        }
-        ...
-    ]
-    :return:
     """
     def render_ingredients(food_ingredients, img_src):
         response = [{

@@ -10,7 +10,7 @@ BASE_URL = "https://api.edamam.com/api/food-database/parser"
 
 def get_nutritional_info(ingredient):
     """
-    Gets nutritional info for an ingredient. Example response res.json()['hints'] looks like
+    Gets nutritional info for an ingredient. Example response res.json()['hints'][0] looks like
     {   'food': {   'category': 'Generic foods',
                                  'categoryLabel': 'food',
                                  'foodId': 'food_a8hs60uayl5icia1qe8qoba1kwp8',
