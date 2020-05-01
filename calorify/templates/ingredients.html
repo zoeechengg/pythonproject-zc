@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Calorify</title>
-</head>
-<body>
-    <div>
-        Your image is
-        <img src={{ img_src }} />
 
-        The model predicts that your image has
+    <style type="text/css">
+        h2 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 25pt;
+            font-weight: bold;
+            color: dodgerblue;
+            text-transform: uppercase;
+        }
+        body #main {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 12pt;
+            text-align: center;
+        }
+        #link{
+            text-decoration: none;
+            font-size:11pt;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Calorify</h2>
+    <div id=main>
+        The image you have chosen is:
+        <p><img height="300" src={{ img_src }} /></p>
+
+        According to the <a href="https://developer.edamam.com/food-database-api-docs"
+        target="_blank">Edamam's Food Database</a>, it predicts that the nutritional information is as follows:
         <div>
             {{ response }}
         </div>
     </div>
-    <a href="/">back to home</a>
+    <div>
+        <a id="link" href="/">Return to Home</a>
+    </div>
 </body>
+
 </html>
