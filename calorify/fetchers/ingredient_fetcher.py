@@ -24,3 +24,20 @@ def get_ingredients_for_local_image(file_path):
         print(e)
 
     return ingredients
+
+def get_ingredients_for_url(url):
+    response = cache.get_prediction(url)
+    if response:
+        print("Prediction for image {} exists in cache".format(url))
+        return response
+
+    response = model.predict_by_url(url, min_value=PRED_LOWER_BOUND)
+    ingredients = []
+    try:
+        concepts = response['outputs'][0]['data']['concepts']  # clarifai API predictions of what's in the image.
+        ingredients = [concept['name'] for concept in concepts]
+        cache.set_prediction(file_path, ingredients)
+    except Exception as e:
+        print(e)
+
+    return ingredients

@@ -4,39 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <title>Calorify</title>
-
     <style type="text/css">
         h2 {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-size: 25pt;
             font-weight: bold;
-            color: dodgerblue;
+            color: black;
             text-transform: uppercase;
         }
-        body #main {
+
+        #ingredients {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-size: 12pt;
-            text-align: center;
+            border-collapse: collapse;
+            width: 100%;
         }
-        #link{
-            text-decoration: none;
-            font-size:11pt;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        #ingredients td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #ingredients tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #ingredients tr:hover {
+            background-color: #ddd;
+        }
+
+        #ingredients th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: dodgerblue;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <h2>Calorify</h2>
-    <div id=main>
-        The image you have chosen is:
-        <p><img height="300" src={{ img_src }} /></p>
-
-        According to the <a href="https://developer.edamam.com/food-database-api-docs"
-        target="_blank">Edamam's Food Database</a>, it predicts that the nutritional information is as follows:
+    <div>
+        <h2>
+            Your image is:
+        </h2>
         <div>
-            {{ response }}
+            <img src={{ img_src }} />
         </div>
+    </div>
+    {% block javascript %}
+    <script>
+        ingredients = JSON.parse({{ ingredients | tojson }})
+    </script>
+    {%  endblock %}
+    <h2>
+        The model predicts that your image has
+    </h2>
+    <div>
+        <table id="ingredients">
+            <thead>
+                <th>Ingredient (all values are per serving)</th>
+                <th>Calories</th>
+                <th>Protein</th>
+                <th>Fat</th>
+                <th>Carbs</th>
+                <th>Fiber</th>
+            </thead>
+            <tbody>
+                {% for ingredient in ingredients %}
+                <tr>
+                    <td> {{ ingredient.ingredient }} </td>
+                    <td>{{ingredient.nutritional_info.ENERC_KCAL}}</td>
+                    <td>{{ingredient.nutritional_info.PROCNT}}</td>
+                    <td><span>{{ingredient.nutritional_info.FAT}}</span></td>
+                    <td><span>{{ingredient.nutritional_info.CHOCDF}}</span></td>
+                    <td><span>{{ingredient.nutritional_info.FIBTG}}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><b>Total: </b></td>
+                    <td><b>{{ ingredients | sum(attribute='nutritional_info.ENERC_KCAL') }}</b></td>
+                    <td><b>{{ ingredients | sum(attribute='nutritional_info.PROCNT') }}</b></td>
+                    <td><b>{{ ingredients | sum(attribute='nutritional_info.FAT') }}</b></td>
+                    <td><b>{{ ingredients | sum(attribute='nutritional_info.CHOCDF') }}</b></td>
+                    <td><b>{{ ingredients | sum(attribute='nutritional_info.FIBTG') }}</b></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
     </div>
     <div>
         <a id="link" href="/">Return to Home</a>
