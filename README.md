@@ -5,9 +5,9 @@
 
 Calorify is an app that allows a user to upload an image, and returns to the user nutritional information on the predicted ingredients in the image.
 
-![Home page](calorify1.png)
+![Home page](calorify1.PNG)
 
-![Ingredients page](calorify2.png)
+![Ingredients page](calorify2.PNG)
 
   
 
