@@ -55,31 +55,18 @@
 </head>
 
 <body>
+    <h2>Calorify</h2>
     <div>
-        <h2>Welcome to Calorify</h2>
-        <h3>What are we?</h3>
-        <p>A website designed to help you figure out all the nutritional facts of what you eat.<p>
-        <h3>How does it work?</h3>
-        <p>To begin, simply upload a picture of your food or enter the image URL. Based on AI machine learning, <a
-                href="https://www.clarifai.com/models/food-image-recognition-model-bd367be194cf45149e75f01d59f77ba7"
-                target="_blank">Clarifai's Food Model</a> will help determine what the food is using image recognition.
-            It will then pass the food items through <a href="https://developer.edamam.com/food-database-api-docs"
-                target="_blank">Edamam's Food Database</a> which will essentially give you all the nutritional
-            information of the food shown in the picture.</p>
+        <h4>
+            Error: {{ msg }}
+        </h4>
+        <h4>
+            You must select a valid file (*.jpg/*.jpeg/*.png) or enter a valid url.
+        </h4>
     </div>
-    <br>
-    <div><h3>Upload an image or enter an image URL</h3></div>
-    <form enctype="multipart/form-data" action="/ingredients" method="post">
-        <fieldset>
-            <legend>File Upload</legend>
-            <input type="file" name="file" size="20" accept="image/*"/>
-        </fieldset>
-        <fieldset>
-            <legend>Image URL</legend>
-            <input type="text" name="url_upload" size="20"/>
-        </fieldset>
-        <p><input type="submit" value="Submit Image!" name="submit_image" /></p>
-    </form>
+    <div>
+        <a id="link" href="/">Return to Home</a>
+    </div>
 </body>
 
 </html>

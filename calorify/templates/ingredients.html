@@ -21,6 +21,12 @@
             text-transform: uppercase;
         }
 
+        h4 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 20pt;
+            color: black;
+        }
+
         #ingredients {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             border-collapse: collapse;
@@ -60,57 +66,61 @@
 
 <body>
     <h2>Calorify</h2>
-    <div>
-        <h3>
-            Your image is:
-        </h3>
+    {% if ingredients %}
         <div>
-            <img height="400" src={{ img_src }} />
+            <h3>
+                Your image is:
+            </h3>
+            <div>
+                <img height="400" src={{ img_src }} />
+            </div>
         </div>
-    </div>
-    {% block javascript %}
-    <script>
-        ingredients = JSON.parse({{ ingredients | tojson }})
-    </script>
-    {%  endblock %}
-    <h3>
-        The model predicts that your image has:
-    </h3>
-    <div>
-        <table id="ingredients">
-            <thead>
-                <th>Ingredients (all values are per serving)</th>
-                <th>Calories</th>
-                <th>Protein</th>
-                <th>Fat</th>
-                <th>Carbs</th>
-                <th>Fiber</th>
-            </thead>
-            <tbody>
-                {% for ingredient in ingredients %}
-                <tr>
-                    <td> {{ ingredient.ingredient }} </td>
-                    <td>{{ingredient.nutritional_info.ENERC_KCAL}}</td>
-                    <td>{{ingredient.nutritional_info.PROCNT}}</td>
-                    <td><span>{{ingredient.nutritional_info.FAT}}</span></td>
-                    <td><span>{{ingredient.nutritional_info.CHOCDF}}</span></td>
-                    <td><span>{{ingredient.nutritional_info.FIBTG}}</span></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td><b>Total: </b></td>
-                    <td><b>{{ ingredients | sum(attribute='nutritional_info.ENERC_KCAL') }}</b></td>
-                    <td><b>{{ ingredients | sum(attribute='nutritional_info.PROCNT') }}</b></td>
-                    <td><b>{{ ingredients | sum(attribute='nutritional_info.FAT') }}</b></td>
-                    <td><b>{{ ingredients | sum(attribute='nutritional_info.CHOCDF') }}</b></td>
-                    <td><b>{{ ingredients | sum(attribute='nutritional_info.FIBTG') }}</b></td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <br>
+        <h3>
+            The model predicts that your image has:
+        </h3>
+
+        <div>
+            <table id="ingredients">
+                <thead>
+                    <th>Ingredients (all values are per serving)</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Fat</th>
+                    <th>Carbs</th>
+                    <th>Fiber</th>
+                </thead>
+                <tbody>
+                    {% for ingredient in ingredients %}
+                    <tr>
+                        <td> {{ ingredient.ingredient }} </td>
+                        <td>{{ingredient.nutritional_info.ENERC_KCAL}}</td>
+                        <td>{{ingredient.nutritional_info.PROCNT}}</td>
+                        <td><span>{{ingredient.nutritional_info.FAT}}</span></td>
+                        <td><span>{{ingredient.nutritional_info.CHOCDF}}</span></td>
+                        <td><span>{{ingredient.nutritional_info.FIBTG}}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><b>Total: </b></td>
+                        <td><b>{{ '%0.2f' | format(ingredients | sum(attribute='nutritional_info.ENERC_KCAL')) }}</b></td>
+                        <td><b>{{ '%0.2f' | format(ingredients | sum(attribute='nutritional_info.PROCNT')) }}</b></td>
+                        <td><b>{{ '%0.2f' | format(ingredients | sum(attribute='nutritional_info.FAT')) }}</b></td>
+                        <td><b>{{ '%0.2f' | format(ingredients | sum(attribute='nutritional_info.CHOCDF')) }}</b></td>
+                        <td><b>{{ '%0.2f' | format(ingredients | sum(attribute='nutritional_info.FIBTG')) }}</b></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <br>
+    {% else %}
+        <div>
+            <h4>
+                We couldn't process your image. Either you uploaded an invalid file, url, or image with unidentifiable ingredients.
+            </h4>
+        </div>
+    {% endif %}
     <div>
         <a id="link" href="/">Return to Home</a>
     </div>

@@ -10,54 +10,7 @@ BASE_URL = "https://api.edamam.com/api/food-database/parser"
 
 def get_nutritional_info(ingredient):
     """
-    Gets nutritional info for an ingredient. Example response res.json()['hints'][0] looks like
-    {   'food': {   'category': 'Generic foods',
-                                 'categoryLabel': 'food',
-                                 'foodId': 'food_a8hs60uayl5icia1qe8qoba1kwp8',
-                                 'label': 'spaghetti',
-                                 'nutrients': {   'CHOCDF': 74.67,
-                                                  'ENERC_KCAL': 371.0,
-                                                  'FAT': 1.51,
-                                                  'FIBTG': 3.2,
-                                                  'PROCNT': 13.04}},
-                     'measures': [   {   'label': 'Whole',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_unit'},
-                                     {   'label': 'Serving',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_serving'},
-                                     {   'label': 'Noodle',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_noodle'},
-                                     {   'label': 'Sheet',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_sheet'},
-                                     {   'label': 'Strip',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_strip'},
-                                     {   'label': 'Shell',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_shell'},
-                                     {   'label': 'Tube',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_tube'},
-                                     {   'label': 'Box',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_box'},
-                                     {   'label': 'Package',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_package'},
-                                     {   'label': 'Packet',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_packet'},
-                                     {   'label': 'Gram',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_gram'},
-                                     {   'label': 'Ounce',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_ounce'},
-                                     {   'label': 'Pound',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_pound'},
-                                     {   'label': 'Kilogram',
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram'},
-                                     {   'label': 'Cup',
-                                         'qualified': [   [   {   'label': 'shaped',
-                                                                  'uri': 'http://www.edamam.com/ontologies/edamam.owl#Qualifier_shaped'}]],
-                                         'uri': 'http://www.edamam.com/ontologies/edamam.owl#Measure_cup'}]},
-    :param ingredient:
-    :return: nutrients, e.g. {   'CHOCDF': 74.67,
-                                  'ENERC_KCAL': 371.0,
-                                  'FAT': 1.51,
-                                  'FIBTG': 3.2,
-                                  'PROCNT': 13.04}
+    Given an ingredient, get nutritional info for it with EDAMAM.
     """
     nutrients = cache.get_nutrition(ingredient)
     if nutrients:
