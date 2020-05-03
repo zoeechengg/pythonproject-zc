@@ -63,7 +63,7 @@ Your terminal or shell should change end with a `(venv)` to reflect that you're 
 
   
 
-Calorify requires on a bunch of external modules to work. To install them, cd into the `calorify` folder if you're not already in there, and type `pip install -r requirements.txt`
+Calorify requires a bunch of external modules to work. To install them, cd into the `calorify` folder if you're not already in there, and type `pip install -r requirements.txt`
 
 ### 5. Run the app!
 
